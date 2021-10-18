@@ -1,5 +1,5 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode } from 'react';
 
 export default function Signup(): ReactNode {
-  return "test";
+    return 'test';
 }

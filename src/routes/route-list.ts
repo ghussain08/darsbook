@@ -1,6 +1,6 @@
-import Dashboard from "../pages/dashboard/index.dashboard";
-import Login from "../pages/login/index.login";
-import Signup from "../pages/signup/index.login";
+import Dashboard from "../pages/dashboard";
+import Login from "../pages/login";
+import Signup from "../pages/signup";
 export interface IRouteList {
   isProtected: boolean;
   path: string;
