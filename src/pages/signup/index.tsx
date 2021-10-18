@@ -5,12 +5,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import InputController from '../../sharable/input-controller';
 import FormGroup from '../../sharable/form-group';
 import { Link as ReactRouter } from 'react-router-dom';
-import loginSchema from './form.schema';
+import signupSchema from './signup.schema';
 import settings from '../../config';
 export default function Login(): ReactNode {
     const { register, control, handleSubmit, formState } = useForm({
-        resolver: yupResolver(loginSchema),
-        defaultValues: { email: '', password: '' },
+        resolver: yupResolver(signupSchema),
+        defaultValues: { email: '', password: '', firstName: '', lastName: '' },
     });
     const onSubmit = (data: any) => {
         console.log('called');
@@ -28,7 +28,8 @@ export default function Login(): ReactNode {
                     {settings.brandName}
                 </Typography>
                 <Typography variant="h6" fontWeight="light" mb={4}>
-                    Login to access your account
+                    Create your free account and manage your mandi records with
+                    ease.
                 </Typography>
                 <form onSubmit={handleSubmit(onSubmit)} action="">
                     <FormGroup>
@@ -51,10 +52,26 @@ export default function Login(): ReactNode {
                             required
                         />
                     </FormGroup>
+                    <FormGroup>
+                        <InputController
+                            autoComplete="firstname"
+                            control={control}
+                            label="First Name"
+                            name="firstName"
+                            required
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <InputController
+                            autoComplete="firstname"
+                            control={control}
+                            label="Last Name"
+                            name="lastName"
+                        />
+                    </FormGroup>
                     <Typography my={3} variant="body2">
-                        <Link component={ReactRouter} to="/password-reset">
-                            Forgot password?
-                        </Link>
+                        By creating account, you agree to our terms and
+                        conditions.
                     </Typography>
                     <Button
                         size="large"
@@ -63,12 +80,12 @@ export default function Login(): ReactNode {
                         variant="contained"
                         disableElevation
                     >
-                        Login
+                        Create free account
                     </Button>
                 </form>
                 <Typography textAlign="center" my={5}>
                     Already created?{' '}
-                    <Link component={ReactRouter} to="/sign-up">
+                    <Link component={ReactRouter} to="/login">
                         Login Here
                     </Link>
                 </Typography>

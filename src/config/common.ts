@@ -1,3 +1,3 @@
 export const commonConfig = {
-    brandName: 'Dars Book',
-}
+    brandName: 'Lekha Jokha',
+};
