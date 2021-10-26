@@ -1,6 +1,7 @@
 import Dashboard from '../pages/dashboard';
 import Login from '../pages/login';
 import Signup from '../pages/signup';
+import VerifySignupEmail from '../pages/verify-signup-email';
 export interface IRouteList {
     isProtected: boolean;
     path: string;
@@ -23,6 +24,12 @@ const routes: IRouteList[] = [
     {
         path: '/sign-up',
         Component: Signup,
+        exact: true,
+        isProtected: false,
+    },
+    {
+        path: '/verify-email',
+        Component: VerifySignupEmail,
         exact: true,
         isProtected: false,
     },

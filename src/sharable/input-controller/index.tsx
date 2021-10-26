@@ -17,19 +17,16 @@ export default function InputController(props: IControllerProps) {
                 const { field, fieldState } = properties;
                 return (
                     <Input
+                        inputProps={props.inputProps}
                         sx={{ backgroundColor: 'white' }}
                         variant="outlined"
                         size="small"
                         aria-required={props.required}
                         aria-invalid={!!fieldState.error}
-                        aria-errormessage={
-                            fieldState.error ? fieldState.error.message : ''
-                        }
+                        aria-errormessage={fieldState.error ? fieldState.error.message : ''}
                         {...field}
                         error={!!fieldState.error}
-                        helperText={
-                            fieldState.error ? fieldState.error.message : null
-                        }
+                        helperText={fieldState.error ? fieldState.error.message : props.helperText}
                         {...rest}
                     />
                 );

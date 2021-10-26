@@ -8,12 +8,16 @@
     "@mui/lab": "latest",
     "@mui/material": "latest",
     "@mui/styled-engine-sc": "latest",
+    "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "latest",
     "@testing-library/react": "latest",
     "@testing-library/user-event": "latest",
+    "axios": "^0.23.0",
+    "axios-auth-refresh": "^3.2.1",
     "react": "latest",
     "react-dom": "latest",
     "react-hook-form": "^7.17.2",
+    "react-redux": "^7.2.5",
     "react-router-dom": "^5.3.0",
     "react-scripts": "latest",
     "styled-components": "latest",
@@ -46,6 +50,10 @@
     "@types/react-router-dom": "^5.3.1",
     "@types/styled-components": "latest",
     "craco-alias": "^3.0.1",
+    "msw": "^0.35.0",
     "typescript": "latest"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

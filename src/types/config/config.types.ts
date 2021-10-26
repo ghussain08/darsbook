@@ -1,3 +1,4 @@
 export interface IConfig {
-    brandName: string
+    brandName: string;
+    baseUrl: string;
 }
