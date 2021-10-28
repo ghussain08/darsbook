@@ -5,22 +5,32 @@ import FormGroup from '../../sharable/form-group';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import verifyEmailSignup from './verify-email.schema';
-import { Link as ReactRouter } from 'react-router-dom';
+import { Link as ReactRouter, useHistory, Redirect } from 'react-router-dom';
 import { ArrowLeftSharp } from '@mui/icons-material';
 import useCountDown from '../../hooks/timer';
 import IVerifySignupEmailInterface from '../../types/verify-email/verify-email.types';
 import useAppSelector from '../../hooks/useAppSelector';
 export default function VerifySignupEmail() {
+    // setup form state and validation
     const { control, handleSubmit, formState, setError, clearErrors } = useForm<IVerifySignupEmailInterface>({
         resolver: yupResolver(verifyEmailSignup), // validate
         defaultValues: { otp: '' },
     });
+
+    // start retry send email otp countdown
     const { timer, hasStopped } = useCountDown({ duration: 120 });
+
     const signUpData = useAppSelector((state) => state.signupPayload);
-    console.log(signUpData);
+    const history = useHistory();
+
     const onSubmit = (data: IVerifySignupEmailInterface) => {
         console.log(data);
     };
+
+    // if email is not present in redux signup data then redirect to signup page
+    if (!signUpData.email) {
+        return <Redirect to="/sign-up" />;
+    }
     return (
         <Container maxWidth="xs" sx={{ paddingTop: 6 }}>
             <Box>

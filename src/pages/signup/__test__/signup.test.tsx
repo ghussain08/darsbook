@@ -4,11 +4,12 @@ import user from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import Signup from '../index';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, Router } from 'react-router-dom';
 import settings from '../../../config';
 import { store } from '../../../redux/store';
 import { Provider } from 'react-redux';
 import handlers from './mocks';
+import { createMemoryHistory, History } from 'history';
 const server = setupServer(...handlers);
 
 beforeAll(() => server.listen());
@@ -18,14 +19,15 @@ afterAll(() => server.close());
 server.events.on('response:mocked', async (res, reqId) => {
     console.log('sent a mocked response', reqId, res);
 });
-
+let history: History;
 describe('Signup page', () => {
     beforeEach(() => {
+        history = createMemoryHistory();
         render(
             <Provider store={store}>
-                <MemoryRouter>
+                <Router history={history}>
                     <Signup />
-                </MemoryRouter>
+                </Router>
             </Provider>
         );
     });
@@ -141,7 +143,7 @@ describe('Signup page', () => {
     });
 
     it('show error if email is already registered', async () => {
-        const { getByTestId, findByRole, getByRole } = screen;
+        const { getByTestId, findByRole, getByRole, queryByRole } = screen;
         const emailField = getByTestId('email-field');
         fireEvent.input(emailField, { target: { value: 'hussainkhan1200@gmail.com' } });
 
@@ -152,13 +154,34 @@ describe('Signup page', () => {
         fireEvent.input(firstNameField, { target: { value: 'Gulam Hussain' } });
 
         const submitBtn = getByTestId('signup-submit-btn');
-        act(() => user.click(submitBtn));
-        // await waitForElementToBeRemoved(() => screen.getByText(/Creating/i));
+        expect(submitBtn).not.toBeDisabled();
+
+        expect(queryByRole('progressbar')).not.toBeInTheDocument();
+        fireEvent.click(submitBtn);
+        await waitForElementToBeRemoved(() => screen.getByRole('progressbar'));
         const errorBox = await findByRole('alert');
         expect(errorBox).toBeInTheDocument();
-
-        // await waitFor(() => user.click(submitBtn));
-        // const errorBox = await waitFor(() => getByRole('alert'));
-        // expect(errorBox).toBeInTheDocument();
+    });
+    it('Redirect to verify email page if api return success', async () => {
+        server.use(
+            rest.post(`${settings.baseUrl}/api/public/v1/signup`, (req, res, ctx) => {
+                return res(ctx.status(200), ctx.json({ data: { userId: 1, email: 'hussainkhan1200@gmail.com' } }));
+            })
+        );
+        const { getByTestId, findByRole, getByRole, queryByRole } = screen;
+        const emailField = getByTestId('email-field');
+        fireEvent.input(emailField, { target: { value: 'hussainkhan1200@gmail.com' } });
+        const passwordField = getByTestId('password-field');
+        fireEvent.input(passwordField, { target: { value: '12345678' } });
+        const firstNameField = getByTestId('firstname-field');
+        fireEvent.input(firstNameField, { target: { value: 'Gulam Hussain' } });
+        const submitBtn = getByTestId('signup-submit-btn');
+        expect(queryByRole('progressbar')).not.toBeInTheDocument();
+        expect(submitBtn).not.toBeDisabled();
+        fireEvent.click(submitBtn);
+        await waitForElementToBeRemoved(() => screen.getByRole('progressbar'));
+        const errorBox = queryByRole('alert');
+        expect(errorBox).not.toBeInTheDocument();
+        expect(history.location.pathname).toBe('/verify-email');
     });
 });

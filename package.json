@@ -50,6 +50,7 @@
     "@types/react-router-dom": "^5.3.1",
     "@types/styled-components": "latest",
     "craco-alias": "^3.0.1",
+    "history": "^5.0.1",
     "msw": "^0.35.0",
     "typescript": "latest"
   },
