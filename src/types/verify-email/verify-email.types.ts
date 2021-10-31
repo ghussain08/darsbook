@@ -1,3 +1,4 @@
-export default interface IVerifySignupEmailInterface {
+export default interface IVerifyEmailPayload {
     otp: string;
+    email: string;
 }

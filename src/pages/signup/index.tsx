@@ -9,17 +9,15 @@ import signupSchema from './signup.schema';
 import settings from '../../config';
 import { ISignupPayload } from '../../types/signup/signup.types';
 import { handleSignup } from './api';
-import ErrorMessages from '../../components/error-messages';
-import errorHandler from '../../utils/error-handler';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import { useHistory } from 'react-router';
-import { setSignUpData } from '../../redux/slices/sign-up.slice';
+import { setSignUpData } from '../../redux/features/sign-up';
+
 const formDefaultValues = {
     email: '',
     password: '',
     firstName: '',
     lastName: '',
-    apiError: '',
 };
 
 /**
@@ -29,26 +27,22 @@ const formDefaultValues = {
  * @returns
  */
 export default function CreateAccount() {
-    const { control, handleSubmit, formState, setError, clearErrors } = useForm<ISignupPayload>({
+    const { control, handleSubmit, formState } = useForm<ISignupPayload>({
         resolver: yupResolver(signupSchema), // validate
         defaultValues: { ...formDefaultValues },
     });
-    const [test, setTest] = useState<any>({});
 
-    const { isSubmitting, errors } = formState;
+    const { isSubmitting } = formState;
     const dispatch = useAppDispatch();
     const history = useHistory();
     const onSignup = async (data: ISignupPayload) => {
-        clearErrors();
         try {
-            const res = await handleSignup(data);
+            await handleSignup(data);
             // set form data in redux
             dispatch(setSignUpData(data));
             // redirect to verify email page
             history.push('/verify-email');
-        } catch (err) {
-            setError('apiError', { type: 'manual', message: errorHandler(err) });
-        }
+        } catch (err) {}
     };
 
     return (
@@ -60,7 +54,6 @@ export default function CreateAccount() {
                 <Typography variant="h6" fontWeight="light" mb={4}>
                     Create your free account and manage your mandi records with ease.
                 </Typography>
-                <ErrorMessages data-testid="error-message" error={errors.apiError} />
                 <form data-testid="signup-form" onSubmit={handleSubmit(onSignup)} action="">
                     <FormGroup>
                         <InputController

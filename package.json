@@ -1,60 +1,66 @@
 {
-  "name": "create-react-app-with-styled-components-typescript",
-  "version": "5.0.0",
-  "private": true,
-  "dependencies": {
-    "@hookform/resolvers": "^2.8.2",
-    "@mui/icons-material": "^5.0.3",
-    "@mui/lab": "latest",
-    "@mui/material": "latest",
-    "@mui/styled-engine-sc": "latest",
-    "@reduxjs/toolkit": "^1.6.2",
-    "@testing-library/jest-dom": "latest",
-    "@testing-library/react": "latest",
-    "@testing-library/user-event": "latest",
-    "axios": "^0.23.0",
-    "axios-auth-refresh": "^3.2.1",
-    "react": "latest",
-    "react-dom": "latest",
-    "react-hook-form": "^7.17.2",
-    "react-redux": "^7.2.5",
-    "react-router-dom": "^5.3.0",
-    "react-scripts": "latest",
-    "styled-components": "latest",
-    "yup": "^0.32.11"
-  },
-  "scripts": {
-    "tsc": "./node_modules/.bin/tsc",
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@craco/craco": "latest",
-    "@types/node": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "@types/react-router-dom": "^5.3.1",
-    "@types/styled-components": "latest",
-    "craco-alias": "^3.0.1",
-    "history": "^5.0.1",
-    "msw": "^0.35.0",
-    "typescript": "latest"
-  },
-  "msw": {
-    "workerDirectory": "public"
-  }
+    "name": "create-react-app-with-styled-components-typescript",
+    "version": "5.0.0",
+    "private": true,
+    "dependencies": {
+        "@hookform/resolvers": "^2.8.2",
+        "@mui/icons-material": "^5.0.3",
+        "@mui/lab": "latest",
+        "@mui/material": "latest",
+        "@mui/styled-engine-sc": "latest",
+        "@reduxjs/toolkit": "^1.6.2",
+        "@testing-library/jest-dom": "latest",
+        "@testing-library/react": "latest",
+        "@testing-library/user-event": "latest",
+        "axios": "^0.23.0",
+        "axios-auth-refresh": "^3.2.1",
+        "cogo-toast": "^4.2.3",
+        "react": "latest",
+        "react-dom": "latest",
+        "react-hook-form": "^7.17.2",
+        "react-redux": "^7.2.5",
+        "react-router-dom": "^5.3.0",
+        "react-scripts": "latest",
+        "styled-components": "latest",
+        "yup": "^0.32.11"
+    },
+    "scripts": {
+        "tsc": "./node_modules/.bin/tsc",
+        "start": "craco start",
+        "build": "craco build",
+        "test": "craco test",
+        "eject": "react-scripts eject"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@craco/craco": "latest",
+        "@types/node": "latest",
+        "@types/react": "latest",
+        "@types/react-dom": "latest",
+        "@types/react-router-dom": "^5.3.1",
+        "@types/styled-components": "latest",
+        "craco-alias": "^3.0.1",
+        "history": "^5.0.1",
+        "msw": "^0.35.0",
+        "typescript": "latest"
+    },
+    "msw": {
+        "workerDirectory": "public"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app"
+        ]
+    }
 }

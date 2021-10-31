@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import signupPayload from './slices/sign-up.slice';
+import signupPayload from './features/sign-up';
+import auth from './features/auth';
+import user from './features/user';
+export const reducer = { signupPayload, auth, user };
 export const store = configureStore({
-    reducer: { signupPayload },
+    reducer,
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

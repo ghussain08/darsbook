@@ -16,9 +16,6 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-server.events.on('response:mocked', async (res, reqId) => {
-    console.log('sent a mocked response', reqId, res);
-});
 let history: History;
 describe('Signup page', () => {
     beforeEach(() => {
@@ -159,8 +156,6 @@ describe('Signup page', () => {
         expect(queryByRole('progressbar')).not.toBeInTheDocument();
         fireEvent.click(submitBtn);
         await waitForElementToBeRemoved(() => screen.getByRole('progressbar'));
-        const errorBox = await findByRole('alert');
-        expect(errorBox).toBeInTheDocument();
     });
     it('Redirect to verify email page if api return success', async () => {
         server.use(
@@ -168,7 +163,7 @@ describe('Signup page', () => {
                 return res(ctx.status(200), ctx.json({ data: { userId: 1, email: 'hussainkhan1200@gmail.com' } }));
             })
         );
-        const { getByTestId, findByRole, getByRole, queryByRole } = screen;
+        const { getByTestId, queryByRole } = screen;
         const emailField = getByTestId('email-field');
         fireEvent.input(emailField, { target: { value: 'hussainkhan1200@gmail.com' } });
         const passwordField = getByTestId('password-field');
@@ -180,8 +175,6 @@ describe('Signup page', () => {
         expect(submitBtn).not.toBeDisabled();
         fireEvent.click(submitBtn);
         await waitForElementToBeRemoved(() => screen.getByRole('progressbar'));
-        const errorBox = queryByRole('alert');
-        expect(errorBox).not.toBeInTheDocument();
         expect(history.location.pathname).toBe('/verify-email');
     });
 });

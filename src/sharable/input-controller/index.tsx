@@ -17,6 +17,7 @@ export default function InputController(props: IControllerProps) {
                 const { field, fieldState } = properties;
                 return (
                     <Input
+                        role={props.role || 'textbox'}
                         inputProps={props.inputProps}
                         sx={{ backgroundColor: 'white' }}
                         variant="outlined"
