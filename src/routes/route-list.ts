@@ -10,7 +10,7 @@ export interface IRouteList {
 }
 const routes: IRouteList[] = [
     {
-        path: '/d',
+        path: '/',
         Component: Dashboard,
         exact: true,
         isProtected: true,

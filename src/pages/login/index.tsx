@@ -1,30 +1,48 @@
-import React, { ReactNode } from 'react';
-import { Container, Box, Typography, Button, Link } from '@mui/material';
+import { Container, Box, Typography, Button, Link, CircularProgress } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputController from '../../sharable/input-controller';
 import FormGroup from '../../sharable/form-group';
-import { Link as ReactRouter } from 'react-router-dom';
+import { Link as ReactRouter, useHistory, Redirect } from 'react-router-dom';
 import loginSchema from './form.schema';
 import settings from '../../config';
-export default function Login(): ReactNode {
-    const { register, control, handleSubmit, formState } = useForm({
+import { handleLogin } from './api';
+import useAppDispatch from '../../hooks/useAppDispatch';
+import { setEmail } from '../../redux/features/email-verification';
+import { setToken } from '../../redux/features/auth';
+import { setUser } from '../../redux/features/user';
+export default function Login() {
+    const { control, handleSubmit, formState } = useForm({
         resolver: yupResolver(loginSchema),
         defaultValues: { email: '', password: '' },
     });
-    const onSubmit = (data: any) => {
-        console.log('called');
-        console.log(data);
+    const token = localStorage.getItem('token');
+    const dispatch = useAppDispatch();
+    const history = useHistory();
+    const { isSubmitting } = formState;
+    if (token) {
+        return <Redirect to="/" />;
+    }
+    const onSubmit = async (data: any) => {
+        try {
+            const res: any = await handleLogin(data);
+            if (res.data.isVerified === 0 || res.data.isLoggedIn === 0) {
+                dispatch(setEmail({ email: res.data.email }));
+                history.push('/verify-email');
+            } else {
+                const { token, user } = res.data;
+                localStorage.setItem('token', token);
+
+                dispatch(setToken(token));
+                dispatch(setUser(user));
+                history.push('/verify-email');
+            }
+        } catch (err) {}
     };
     return (
         <Container maxWidth="xs" sx={{ paddingTop: 8 }}>
             <Box>
-                <Typography
-                    textAlign="center"
-                    variant="h4"
-                    fontWeight="500"
-                    mb={7}
-                >
+                <Typography textAlign="center" variant="h4" fontWeight="500" mb={7}>
                     {settings.brandName}
                 </Typography>
                 <Typography variant="h6" fontWeight="light" mb={4}>
@@ -33,6 +51,7 @@ export default function Login(): ReactNode {
                 <form onSubmit={handleSubmit(onSubmit)} action="">
                     <FormGroup>
                         <InputController
+                            id="email"
                             autoComplete="email"
                             control={control}
                             label="Email"
@@ -40,7 +59,6 @@ export default function Login(): ReactNode {
                             required
                         />
                     </FormGroup>
-
                     <FormGroup>
                         <InputController
                             autoComplete="password"
@@ -49,6 +67,7 @@ export default function Login(): ReactNode {
                             name="password"
                             type="password"
                             required
+                            id="password"
                         />
                     </FormGroup>
                     <Typography my={3} variant="body2">
@@ -57,8 +76,10 @@ export default function Login(): ReactNode {
                         </Link>
                     </Typography>
                     <Button
+                        disabled={isSubmitting}
                         size="large"
                         fullWidth
+                        endIcon={isSubmitting ? <CircularProgress size={20} thickness={5} /> : null}
                         type="submit"
                         variant="contained"
                         disableElevation
@@ -67,9 +88,9 @@ export default function Login(): ReactNode {
                     </Button>
                 </form>
                 <Typography textAlign="center" my={5}>
-                    Already created?{' '}
+                    New User?{' '}
                     <Link component={ReactRouter} to="/sign-up">
-                        Login Here
+                        Create a new account
                     </Link>
                 </Typography>
             </Box>

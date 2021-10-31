@@ -17,13 +17,14 @@ import useAppDispatch from '../../hooks/useAppDispatch';
 
 export default function VerifySignupEmail() {
     const [isResending, toggleResendEmailLoader] = useState(false);
-    const signUpData = useAppSelector((state) => state.signupPayload);
+    const emailData = useAppSelector((state) => state.email);
+    const token = useAppSelector((state) => state.auth.token);
     const dispatch = useAppDispatch();
-
+    const email = emailData ? emailData.email : '';
     // setup form state and validation
     const { control, handleSubmit, formState } = useForm<IVerifyEmailPayload>({
         resolver: yupResolver(verifyEmailSignup), // validate
-        defaultValues: { otp: '', email: signUpData.email },
+        defaultValues: { otp: '', email },
     });
     const { isSubmitting } = formState;
 
@@ -32,15 +33,19 @@ export default function VerifySignupEmail() {
 
     const history = useHistory();
 
-    // if email is not present in redux signup data then redirect to signup page
-    if (!signUpData.email) {
+    // if email is not present in redux then redirect to signup page
+    if (!email) {
         return <Redirect to="/sign-up" />;
+    }
+    if (token) {
+        return <Redirect to="/" />;
     }
 
     const onSubmit = async (data: IVerifyEmailPayload) => {
         try {
             const res: any = await verifyEmail(data);
             const { token, user } = res.data;
+            localStorage.setItem('token', token);
             dispatch(setUser(user));
             dispatch(setToken(token));
             history.push('/?message=onboard');
@@ -51,7 +56,7 @@ export default function VerifySignupEmail() {
     const handleResendOtp = async () => {
         toggleResendEmailLoader(true);
         try {
-            await resendEmailVerificationOTP({ email: signUpData.email });
+            await resendEmailVerificationOTP({ email });
         } catch (err) {
         } finally {
             toggleResendEmailLoader(false);
@@ -61,9 +66,6 @@ export default function VerifySignupEmail() {
     return (
         <Container maxWidth="xs" sx={{ paddingTop: 6 }}>
             <Box>
-                <Button startIcon={<ArrowLeftSharp />} component={ReactRouter} to="/sign-up">
-                    Go back
-                </Button>
                 <Typography variant="h5" textAlign="center" my={7}>
                     Verify your email address{' '}
                 </Typography>

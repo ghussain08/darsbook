@@ -10,9 +10,9 @@ import settings from '../../config';
 import { ISignupPayload } from '../../types/signup/signup.types';
 import { handleSignup } from './api';
 import useAppDispatch from '../../hooks/useAppDispatch';
-import { useHistory } from 'react-router';
+import { Redirect, useHistory } from 'react-router';
 import { setSignUpData } from '../../redux/features/sign-up';
-
+import { setEmail } from '../../redux/features/email-verification';
 const formDefaultValues = {
     email: '',
     password: '',
@@ -31,6 +31,7 @@ export default function CreateAccount() {
         resolver: yupResolver(signupSchema), // validate
         defaultValues: { ...formDefaultValues },
     });
+    const token = localStorage.getItem('token');
 
     const { isSubmitting } = formState;
     const dispatch = useAppDispatch();
@@ -38,12 +39,14 @@ export default function CreateAccount() {
     const onSignup = async (data: ISignupPayload) => {
         try {
             await handleSignup(data);
-            // set form data in redux
-            dispatch(setSignUpData(data));
+            dispatch(setEmail({ email: data.email }));
             // redirect to verify email page
             history.push('/verify-email');
         } catch (err) {}
     };
+    if (token) {
+        return <Redirect to="/" />;
+    }
 
     return (
         <Container maxWidth="xs" sx={{ paddingTop: 6 }}>
