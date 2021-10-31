@@ -32,12 +32,13 @@ export default function Login() {
             } else {
                 const { token, user } = res.data;
                 localStorage.setItem('token', token);
-
                 dispatch(setToken(token));
                 dispatch(setUser(user));
-                history.push('/verify-email');
+                history.push('/');
             }
-        } catch (err) {}
+        } catch (err) {
+            console.log(err);
+        }
     };
     return (
         <Container maxWidth="xs" sx={{ paddingTop: 8 }}>
