@@ -9,7 +9,6 @@ import settings from '../../config';
 import { handleLogin } from './api';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import { setEmail } from '../../redux/features/email-verification';
-import { setToken } from '../../redux/features/auth';
 import { setUser } from '../../redux/features/user';
 export default function Login() {
     const { control, handleSubmit, formState } = useForm({
@@ -32,7 +31,6 @@ export default function Login() {
             } else {
                 const { token, user } = res.data;
                 localStorage.setItem('token', token);
-                dispatch(setToken(token));
                 dispatch(setUser(user));
                 history.push('/');
             }

@@ -1,8 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import auth from './features/auth';
 import user from './features/user';
 import email from './features/email-verification';
-export const reducer = { auth, user, email };
+export const reducer = { user, email };
 export const store = configureStore({
     reducer,
 });

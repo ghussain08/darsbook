@@ -6,19 +6,17 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import verifyEmailSignup from './verify-email.schema';
 import { Link as ReactRouter, useHistory, Redirect } from 'react-router-dom';
-import { ArrowLeftSharp } from '@mui/icons-material';
 import useCountDown from '../../hooks/timer';
 import IVerifyEmailPayload from '../../types/verify-email/verify-email.types';
 import { resendEmailVerificationOTP, verifyEmail } from './api';
 import { setUser } from '../../redux/features/user';
-import { setToken } from '../../redux/features/auth';
 import useAppSelector from '../../hooks/useAppSelector';
 import useAppDispatch from '../../hooks/useAppDispatch';
 
 export default function VerifySignupEmail() {
     const [isResending, toggleResendEmailLoader] = useState(false);
     const emailData = useAppSelector((state) => state.email);
-    const token = useAppSelector((state) => state.auth.token);
+    const token = localStorage.getItem('token');
     const dispatch = useAppDispatch();
     const email = emailData ? emailData.email : '';
     // setup form state and validation
@@ -47,7 +45,6 @@ export default function VerifySignupEmail() {
             const { token, user } = res.data;
             localStorage.setItem('token', token);
             dispatch(setUser(user));
-            dispatch(setToken(token));
             history.push('/?message=onboard');
         } catch (err) {}
     };
