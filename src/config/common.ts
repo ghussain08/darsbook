@@ -1,3 +1,3 @@
 export const commonConfig = {
-    brandName: 'Lekha Jokha',
+    brandName: 'ASAANJO',
 };

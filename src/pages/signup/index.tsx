@@ -11,8 +11,8 @@ import { ISignupPayload } from '../../types/signup/signup.types';
 import { handleSignup } from './api';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import { Redirect, useHistory } from 'react-router';
-import { setSignUpData } from '../../redux/features/sign-up';
-import { setEmail } from '../../redux/features/email-verification';
+import { setSignUpData } from '../../app/features/sign-up';
+import { setEmail } from '../../app/features/email-verification';
 const formDefaultValues = {
     email: '',
     password: '',

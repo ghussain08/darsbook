@@ -3,7 +3,7 @@ import { ThemeProvider, CssBaseline } from '@mui/material';
 import theme from './theme/theme';
 import SiteContainer from './components/site-container';
 import Routes from './routes/index.routes';
-import { store } from './redux/store';
+import { store } from './app/store';
 import { Provider } from 'react-redux';
 import { createGlobalStyle } from 'styled-components';
 import fontRegular from './fonts/Manrope-Regular.ttf';

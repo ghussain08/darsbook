@@ -8,8 +8,8 @@ import loginSchema from './form.schema';
 import settings from '../../config';
 import { handleLogin } from './api';
 import useAppDispatch from '../../hooks/useAppDispatch';
-import { setEmail } from '../../redux/features/email-verification';
-import { setUser } from '../../redux/features/user';
+import { setEmail } from '../../app/features/email-verification';
+import { setUser } from '../../app/features/user';
 export default function Login() {
     const { control, handleSubmit, formState } = useForm({
         resolver: yupResolver(loginSchema),

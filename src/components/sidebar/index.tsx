@@ -1,11 +1,12 @@
 import React from 'react';
-import AdminCard from './admin-card';
-import { Box } from '@mui/material';
+import BrandName from './brand-name';
+import { Box, Typography, useTheme } from '@mui/material';
 import Menu from './menu';
 export default function Sidebar() {
+    const theme = useTheme();
     return (
         <Box p={2}>
-            <AdminCard />
+            <BrandName />
             <Menu />
         </Box>
     );

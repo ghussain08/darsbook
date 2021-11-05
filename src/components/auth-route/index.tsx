@@ -7,7 +7,10 @@ import { Route, Redirect } from 'react-router-dom';
  */
 const AuthRoute = ({ component: Component, ...rest }: any) => {
     const token = localStorage.getItem('token');
-    return <Route {...rest} render={(props) => (token ? <Component {...props} /> : <Redirect to="/login" />)} />;
+    if (!token) {
+        return <Redirect to="/login" />;
+    }
+    return <Route {...rest} render={(props) => <Component {...props} />} />;
 };
 
 export default AuthRoute;

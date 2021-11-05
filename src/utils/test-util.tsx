@@ -3,9 +3,9 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import { createMemoryHistory, History } from 'history';
-import { RootState } from '../redux/store';
+import { RootState } from '../app/store';
 import { configureStore } from '@reduxjs/toolkit';
-import { reducer } from '../redux/store';
+import { reducer } from '../app/store';
 interface ICustomRenderOptions {
     initialState?: Partial<RootState>;
     initialEntries?: string[];

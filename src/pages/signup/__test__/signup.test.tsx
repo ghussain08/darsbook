@@ -6,7 +6,7 @@ import { setupServer } from 'msw/node';
 import Signup from '../index';
 import { MemoryRouter, Router } from 'react-router-dom';
 import settings from '../../../config';
-import { store } from '../../../redux/store';
+import { store } from '../../../app/store';
 import { Provider } from 'react-redux';
 import handlers from './mocks';
 import { createMemoryHistory, History } from 'history';

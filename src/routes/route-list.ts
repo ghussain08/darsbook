@@ -10,12 +10,6 @@ export interface IRouteList {
 }
 const routes: IRouteList[] = [
     {
-        path: '/',
-        Component: Dashboard,
-        exact: true,
-        isProtected: true,
-    },
-    {
         path: '/login',
         Component: Login,
         exact: true,
@@ -32,6 +26,25 @@ const routes: IRouteList[] = [
         Component: VerifySignupEmail,
         exact: true,
         isProtected: false,
+    },
+
+    {
+        path: '/d',
+        Component: Dashboard,
+        exact: true,
+        isProtected: true,
+    },
+    {
+        path: '/e',
+        Component: Dashboard,
+        exact: true,
+        isProtected: true,
+    },
+    {
+        path: '/',
+        Component: Dashboard,
+        exact: true,
+        isProtected: true,
     },
 ];
 

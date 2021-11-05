@@ -9,7 +9,7 @@ import { Link as ReactRouter, useHistory, Redirect } from 'react-router-dom';
 import useCountDown from '../../hooks/timer';
 import IVerifyEmailPayload from '../../types/verify-email/verify-email.types';
 import { resendEmailVerificationOTP, verifyEmail } from './api';
-import { setUser } from '../../redux/features/user';
+import { setUser } from '../../app/features/user';
 import useAppSelector from '../../hooks/useAppSelector';
 import useAppDispatch from '../../hooks/useAppDispatch';
 

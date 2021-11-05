@@ -8,6 +8,8 @@ export interface IUserState {
     isVerified: 0 | 1;
     registeredOn: string;
     updatedOn: string;
+    firstName: string;
+    lastName: string | null;
 }
 type IUserInitialState = IUserState | null;
 
