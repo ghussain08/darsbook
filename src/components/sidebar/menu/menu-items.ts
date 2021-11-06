@@ -1,4 +1,4 @@
-import { Dashboard, Receipt, Person } from '@mui/icons-material';
+import { Dashboard, Receipt, Person, Settings } from '@mui/icons-material';
 const menuItems = [
     {
         name: 'Dashboard',
@@ -14,6 +14,11 @@ const menuItems = [
         name: 'Customers',
         to: '/e',
         icon: Person,
+    },
+    {
+        name: 'Settings',
+        to: '/settings',
+        icon: Settings,
     },
 ];
 export default menuItems;

@@ -23,7 +23,7 @@ export default function CheckAuth(props: { children: JSX.Element }) {
     if (isLoading) {
         return (
             <Backdrop sx={{ backgroundColor: 'white' }} open={true}>
-                <Loader />
+                <Loader isOpen={true} />
             </Backdrop>
         );
     }

@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosError } from 'axios';
 import config from '../config';
 import cogotoast from 'cogo-toast';
-
+import { BaseQueryFn } from '@reduxjs/toolkit/dist/query';
 const axiosInstance = axios.create({
     baseURL: config.baseUrl,
     headers: {
@@ -33,7 +33,7 @@ axiosInstance.interceptors.response.use(onResponseSuccess, onResponseError);
 function onResponseSuccess(response: any) {
     if (response.data && response.data.messages) {
         response.data.messages.forEach((message: any) => {
-            cogotoast.success(message.msg);
+            cogotoast.success(message.msg, { position: 'top-right' });
         });
     }
 
@@ -55,10 +55,10 @@ function showErrorToasts(err: any) {
     if (status !== 401 && err.response.data && err.response.data.errors) {
         // loop over errors and show cogo-toast error version
         err.response.data.errors.forEach((error: any) => {
-            cogotoast.error(error.msg);
+            cogotoast.error(error.msg, { position: 'top-right' });
         });
     } else if (status >= 500) {
-        cogotoast.error('Unknown error occurred, please try again later');
+        cogotoast.error('Unknown error occurred, please try again later', { position: 'top-right' });
     }
 }
 
@@ -83,6 +83,27 @@ function handle401Error(err: any) {
         .catch((err: any) => {
             localStorage.removeItem('token');
             window.location.href = '/login';
-            console.log(err);
         });
 }
+
+export const axiosBaseQuery =
+    (): BaseQueryFn<
+        {
+            url: string;
+            method?: AxiosRequestConfig['method'];
+            data?: AxiosRequestConfig['data'];
+        },
+        unknown,
+        unknown
+    > =>
+    async ({ url, method, data }) => {
+        try {
+            const result = await axiosInstance({ method: method || 'GET', data, url });
+            return { data: result.data };
+        } catch (axiosError) {
+            let err = axiosError as any;
+            return {
+                error: { status: err.status, data: err.errors },
+            };
+        }
+    };

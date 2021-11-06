@@ -21,6 +21,9 @@ const themeOptions: ThemeOptions = createTheme({
         h1: {
             fontWeight: 600,
         },
+        button: {
+            textTransform: 'capitalize',
+        },
     },
     spacing: 8,
 });

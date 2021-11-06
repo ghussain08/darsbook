@@ -1,8 +1,8 @@
+import { CircularProgress } from '@mui/material';
 import React from 'react';
-import Lottie from 'react-lottie';
-import loaderAnimation from './loader.json';
-export default function Loader(props: { height?: number }) {
-    return (
-        <Lottie height={props.height || 200} options={{ loop: true, autoplay: true, animationData: loaderAnimation }} />
-    );
+export default function Loader(props: { size?: number; thickness?: number; isOpen: boolean }) {
+    if (!props.isOpen) {
+        return null;
+    }
+    return <CircularProgress size={props.size || '30px'} thickness={props.thickness || 8} />;
 }

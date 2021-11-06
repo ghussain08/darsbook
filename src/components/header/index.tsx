@@ -81,7 +81,7 @@ function ResponsiveDrawer(props: { children: React.ReactNode }) {
                     {drawer}
                 </Drawer>
             </Box>
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }} mt="57px">
+            <Box component="main" sx={{ flexGrow: 1, p: 2 }} mt="57px">
                 {props.children}
             </Box>
         </Box>
