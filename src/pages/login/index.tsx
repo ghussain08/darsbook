@@ -34,9 +34,7 @@ export default function Login() {
                 dispatch(setUser(user));
                 history.push('/');
             }
-        } catch (err) {
-            console.log(err);
-        }
+        } catch (err) {}
     };
     return (
         <Container maxWidth="xs" sx={{ paddingTop: 8 }}>
