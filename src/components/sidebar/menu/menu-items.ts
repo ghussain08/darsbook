@@ -1,19 +1,15 @@
-import { Dashboard, Receipt, Person, Settings } from '@mui/icons-material';
+import { Dashboard, Receipt, AddCircle, Settings } from '@mui/icons-material';
 const menuItems = [
     {
         name: 'Dashboard',
         to: '/',
         icon: Dashboard,
     },
+
     {
-        name: 'Orders',
-        to: '/d',
-        icon: Receipt,
-    },
-    {
-        name: 'Customers',
-        to: '/e',
-        icon: Person,
+        name: 'New Bill',
+        to: '/new-bill',
+        icon: AddCircle,
     },
     {
         name: 'Settings',

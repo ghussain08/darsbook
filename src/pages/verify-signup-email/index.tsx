@@ -5,7 +5,7 @@ import FormGroup from '../../sharable/form-group';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import verifyEmailSignup from './verify-email.schema';
-import { Link as ReactRouter, useHistory, Redirect } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import useCountDown from '../../hooks/timer';
 import IVerifyEmailPayload from '../../types/verify-email/verify-email.types';
 import { resendEmailVerificationOTP, verifyEmail } from './api';

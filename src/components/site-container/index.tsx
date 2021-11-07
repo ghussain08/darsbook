@@ -1,10 +1,8 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-const SiteContainerComponent = styled.section`
-  font-family: "Public Sans, sans-serif";
-`;
+const SiteContainerComponent = styled.section``;
 
 export default function SiteContainer(props: { children: React.ReactNode }) {
-  return <SiteContainerComponent>{props.children}</SiteContainerComponent>;
+    return <SiteContainerComponent>{props.children}</SiteContainerComponent>;
 }

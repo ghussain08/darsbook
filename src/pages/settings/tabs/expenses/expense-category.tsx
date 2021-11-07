@@ -33,7 +33,7 @@ export default function ExpenseCategory(props: { expense: IExpense }) {
                 <Button
                     disabled={isLoading}
                     endIcon={isLoading ? <CircularProgress size={20} /> : null}
-                    onClick={() => setIsOpen(true)}
+                    onClick={expense.isActive ? () => setIsOpen(true) : updateExpenseHandler}
                     color={expense.isActive ? 'error' : 'success'}
                 >
                     {expense.isActive ? 'Disable' : 'Enable'}

@@ -3,6 +3,7 @@ import Login from '../pages/login';
 import Signup from '../pages/signup';
 import VerifySignupEmail from '../pages/verify-signup-email';
 import Settings from '../pages/settings';
+import NewBill from '../pages/new-bill';
 export interface IRouteList {
     isProtected: boolean;
     path: string;
@@ -28,19 +29,6 @@ const routes: IRouteList[] = [
         exact: true,
         isProtected: false,
     },
-
-    {
-        path: '/d',
-        Component: Dashboard,
-        exact: true,
-        isProtected: true,
-    },
-    {
-        path: '/e',
-        Component: Dashboard,
-        exact: true,
-        isProtected: true,
-    },
     {
         path: '/',
         Component: Dashboard,
@@ -50,6 +38,12 @@ const routes: IRouteList[] = [
     {
         path: '/settings',
         Component: Settings,
+        exact: true,
+        isProtected: true,
+    },
+    {
+        path: '/new-bill',
+        Component: NewBill,
         exact: true,
         isProtected: true,
     },

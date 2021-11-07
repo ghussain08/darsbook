@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Sidebar from '../sidebar';
+import { useTheme } from '@mui/material';
 const drawerWidth = 250;
 
 function ResponsiveDrawer(props: { children: React.ReactNode }) {
@@ -18,7 +19,7 @@ function ResponsiveDrawer(props: { children: React.ReactNode }) {
     const drawer = <Sidebar />;
 
     const container = undefined;
-
+    const theme = useTheme();
     return (
         <Box sx={{ display: 'flex' }}>
             <AppBar
@@ -81,7 +82,12 @@ function ResponsiveDrawer(props: { children: React.ReactNode }) {
                     {drawer}
                 </Drawer>
             </Box>
-            <Box component="main" sx={{ flexGrow: 1, p: 2 }} mt="57px">
+            <Box
+                bgcolor={theme.palette.grey[50]}
+                component="main"
+                sx={{ flexGrow: 1, p: 2, minHeight: '100vh' }}
+                mt="57px"
+            >
                 {props.children}
             </Box>
         </Box>

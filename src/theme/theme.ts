@@ -16,7 +16,7 @@ const themeOptions: ThemeOptions = createTheme({
         divider: 'rgba(162,150,150,0.12)',
     },
     typography: {
-        fontFamily: 'Public Sans, sans-serif',
+        fontFamily: ['PT Sans, sans-serif'].join(', '),
         fontSize: 14,
         h1: {
             fontWeight: 600,
