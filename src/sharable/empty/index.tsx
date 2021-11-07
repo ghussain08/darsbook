@@ -1,14 +1,11 @@
-import { Typography, Box, useTheme } from '@mui/material';
-import { ReportGmailerrorred } from '@mui/icons-material';
+import { Typography, Alert } from '@mui/material';
 // create a component to show no data found message
 const Empty = (props: { message?: string; isOpen: boolean }) => {
-    const theme = useTheme();
     if (!props.isOpen) return null;
     return (
-        <Box display="flex" color={theme.palette.error.main}>
-            <ReportGmailerrorred />
+        <Alert variant="outlined" severity="info">
             <Typography>{props.message || 'No data found'}</Typography>
-        </Box>
+        </Alert>
     );
 };
 

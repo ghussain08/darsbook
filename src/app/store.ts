@@ -2,11 +2,17 @@ import { configureStore } from '@reduxjs/toolkit';
 import user from './features/user';
 import email from './features/email-verification';
 import { seedsApi } from './features/seeds';
+import { expenseApi } from './features/expenses-items';
 import { setupListeners } from '@reduxjs/toolkit/query';
-export const reducer = { user, email, [seedsApi.reducerPath]: seedsApi.reducer };
+export const reducer = {
+    user,
+    email,
+    [seedsApi.reducerPath]: seedsApi.reducer,
+    [expenseApi.reducerPath]: expenseApi.reducer,
+};
 export const store = configureStore({
     reducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(seedsApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(seedsApi.middleware, expenseApi.middleware),
 });
 
 setupListeners(store.dispatch);
