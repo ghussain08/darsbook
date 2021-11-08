@@ -1,4 +1,5 @@
 export interface INewBillFormValues {
+    orderType: 'sell' | 'buy';
     customerName: string;
     customerAddress: string;
     customerMobile: string;

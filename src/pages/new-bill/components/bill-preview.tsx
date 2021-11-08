@@ -15,12 +15,13 @@ import {
     Divider,
     DialogActions,
     Button,
-} from '@mui/material';
-import React from 'react';
-import { useGetUserExpenseItemQuery } from '../../../app/features/expenses-items';
-import { useGetUserSeedsQuery } from '../../../app/features/seeds';
-import { INewBillFormValues } from '../../../types/new-bill/new-bill.types';
-import TotalBillAmount from './total-bill-amount';
+    Alert,
+} from "@mui/material";
+import React from "react";
+import { useGetUserExpenseItemQuery } from "../../../app/features/expenses-items";
+import { useGetUserSeedsQuery } from "../../../app/features/seeds";
+import { INewBillFormValues } from "../../../types/new-bill/new-bill.types";
+import TotalBillAmount from "./total-bill-amount";
 interface IBillPreviewProps {
     getValues: () => INewBillFormValues;
     onConfirm: () => void;
@@ -35,16 +36,15 @@ export default function BillPreview(props: IBillPreviewProps) {
             <DialogTitle>Bill Preview</DialogTitle>
 
             <DialogContent>
-                <Typography variant="h6">Customer</Typography>
-                <Box my={2}>
+                <Box mb={2}>
                     <Typography paragraph>
                         Customer: {values.customerName} ({values.customerMobile})
                     </Typography>
                     <Typography paragraph>Address: {values.customerAddress}</Typography>
                 </Box>
-                <Typography variant="h6">Bill Items</Typography>
+                <Typography fontWeight="bold">Bill Items</Typography>
                 <TableContainer sx={{ mb: 3 }} component={Paper} variant="outlined">
-                    <Table>
+                    <Table size="small">
                         <TableHead>
                             <TableRow>
                                 <TableCell>Item</TableCell>
@@ -75,9 +75,9 @@ export default function BillPreview(props: IBillPreviewProps) {
                 </TableContainer>
                 {values.expenses.length > 0 ? (
                     <React.Fragment>
-                        <Typography variant="h6">Expenses Items</Typography>
+                        <Typography fontWeight="bold">Expenses Items</Typography>
                         <TableContainer component={Paper} variant="outlined">
-                            <Table>
+                            <Table size="small">
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>Expense Category</TableCell>
@@ -106,6 +106,7 @@ export default function BillPreview(props: IBillPreviewProps) {
                 ) : null}
                 <Divider />
                 <TotalBillAmount getValues={props.getValues} />
+                <Alert severity="warning">Order Type is {values.orderType}</Alert>
             </DialogContent>
             <DialogActions>
                 <Button disableElevation color="secondary" onClick={props.onCancel} variant="contained">

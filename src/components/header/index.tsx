@@ -1,12 +1,12 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import Toolbar from '@mui/material/Toolbar';
-import Sidebar from '../sidebar';
-import { useTheme } from '@mui/material';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import Toolbar from "@mui/material/Toolbar";
+import Sidebar from "../sidebar";
+import { useTheme } from "@mui/material";
 const drawerWidth = 250;
 
 function ResponsiveDrawer(props: { children: React.ReactNode }) {
@@ -21,7 +21,7 @@ function ResponsiveDrawer(props: { children: React.ReactNode }) {
     const container = undefined;
     const theme = useTheme();
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: "flex" }}>
             <AppBar
                 color="inherit"
                 position="fixed"
@@ -29,7 +29,8 @@ function ResponsiveDrawer(props: { children: React.ReactNode }) {
                 sx={{
                     width: { sm: `calc(100% - ${drawerWidth}px)` },
                     ml: { sm: `${drawerWidth}px` },
-                    borderBottom: '1px solid ghostwhite',
+                    borderBottom: "1px solid ghostwhite",
+                    zIndex: 1,
                 }}
             >
                 <Toolbar>
@@ -38,7 +39,7 @@ function ResponsiveDrawer(props: { children: React.ReactNode }) {
                         aria-label="open drawer"
                         edge="start"
                         onClick={handleDrawerToggle}
-                        sx={{ mr: 2, display: { sm: 'none' } }}
+                        sx={{ mr: 2, display: { sm: "none" } }}
                     >
                         <MenuIcon />
                     </IconButton>
@@ -46,7 +47,7 @@ function ResponsiveDrawer(props: { children: React.ReactNode }) {
             </AppBar>
             <Box
                 component="nav"
-                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 }, zIndex: 1 }}
                 aria-label="mailbox folders"
             >
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -59,9 +60,9 @@ function ResponsiveDrawer(props: { children: React.ReactNode }) {
                         keepMounted: true, // Better open performance on mobile.
                     }}
                     sx={{
-                        display: { xs: 'block', sm: 'none' },
-                        '& .MuiDrawer-paper': {
-                            boxSizing: 'border-box',
+                        display: { xs: "block", sm: "none" },
+                        "& .MuiDrawer-paper": {
+                            boxSizing: "border-box",
                             width: drawerWidth,
                         },
                     }}
@@ -71,9 +72,9 @@ function ResponsiveDrawer(props: { children: React.ReactNode }) {
                 <Drawer
                     variant="permanent"
                     sx={{
-                        display: { xs: 'none', sm: 'block' },
-                        '& .MuiDrawer-paper': {
-                            boxSizing: 'border-box',
+                        display: { xs: "none", sm: "block" },
+                        "& .MuiDrawer-paper": {
+                            boxSizing: "border-box",
                             width: drawerWidth,
                         },
                     }}
@@ -85,7 +86,7 @@ function ResponsiveDrawer(props: { children: React.ReactNode }) {
             <Box
                 bgcolor={theme.palette.grey[50]}
                 component="main"
-                sx={{ flexGrow: 1, p: 2, minHeight: '100vh' }}
+                sx={{ flexGrow: 1, p: 2, minHeight: "100vh" }}
                 mt="57px"
             >
                 {props.children}
