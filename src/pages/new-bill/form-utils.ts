@@ -9,6 +9,8 @@ const createBillSchema = yup
             .max(100, "Maximum 100 character")
             .min(4, "Minimum 4 characters"),
         customerMobile: yup.string().required("Customer mobile is required").length(10),
+        remark: yup.string().max(100, "Maximum 100 character"),
+
         customerAddress: yup.string().required("Address is required").max(100, "Maximum 100 characters"),
         seedItems: yup.array().of(
             yup.object().shape({
@@ -41,6 +43,7 @@ export const defaultValues: INewBillFormValues = {
     customerMobile: "",
     customerName: "",
     customerAddress: "",
+    remark: "",
     seedItems: [
         {
             seedId: "",
@@ -48,10 +51,5 @@ export const defaultValues: INewBillFormValues = {
             pricePerKg: "",
         },
     ],
-    expenses: [
-        {
-            expenseId: "",
-            amount: "",
-        },
-    ],
+    expenses: [],
 };

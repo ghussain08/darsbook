@@ -56,7 +56,7 @@ export default function BillPreview(props: IBillPreviewProps) {
                         <TableBody>
                             {values.seedItems.map((seedItem, index: number) => {
                                 return (
-                                    <TableRow>
+                                    <TableRow key={index}>
                                         <TableCell>
                                             {seedData?.seeds.find((seed) => seed.seedId === +seedItem.seedId)?.seedName}
                                         </TableCell>
@@ -87,7 +87,7 @@ export default function BillPreview(props: IBillPreviewProps) {
                                 <TableBody>
                                     {values.expenses.map((expenseItem, index: number) => {
                                         return (
-                                            <TableRow>
+                                            <TableRow key={index}>
                                                 <TableCell>
                                                     {
                                                         expenseData?.expenses.find(

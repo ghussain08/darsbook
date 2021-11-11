@@ -13,7 +13,7 @@ export default function OrderType(props: IOrderTypeProps) {
                 rules={{ required: true }}
                 render={({ field, fieldState }) => {
                     return (
-                        <FormControl component="fieldset">
+                        <FormControl required component="fieldset">
                             <FormLabel component={"legend"}>Order Type</FormLabel>
                             <RadioGroup row {...field} aria-label="order-type">
                                 <FormControlLabel value={"buy"} control={<Radio />} label="Buy" />

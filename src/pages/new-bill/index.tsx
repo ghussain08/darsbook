@@ -14,6 +14,7 @@ import OrderType from "./components/order-type";
 import { useCreateBillMutation } from "../../app/features/bill";
 import FullPageLoader from "../../sharable/fullpage-loader";
 import OrderConfirmation from "./components/order-confirmation";
+import BillRemark from "./components/bill-remark";
 
 export default function NewBill() {
     const [preview, togglePreview] = useState(false);
@@ -53,6 +54,8 @@ export default function NewBill() {
                     <SeedItems getValues={getValues} control={control} />
                     <Divider />
                     <ExpenseItems control={control} />
+                    <Divider />
+                    <BillRemark control={control} />
                     <Divider />
                     <TotalBillAmount getValues={getValues} />
                     <Divider />

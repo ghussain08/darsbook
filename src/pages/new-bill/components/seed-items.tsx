@@ -29,6 +29,7 @@ export default function SeedItems(props: ISeedItemsProps) {
                             <Grid item xs={12} sm={3} md={3}>
                                 <FormGroup>
                                     <SeedDropdown
+                                        required
                                         select
                                         label="Item"
                                         control={props.control}
@@ -39,6 +40,7 @@ export default function SeedItems(props: ISeedItemsProps) {
                             <Grid item xs={12} sm={3} md={3}>
                                 <FormGroup>
                                     <InputController
+                                        required
                                         type="number"
                                         inputProps={{ min: 0, step: 0.01 }}
                                         label="Weight(in kgs)"
@@ -50,6 +52,7 @@ export default function SeedItems(props: ISeedItemsProps) {
                             <Grid item xs={12} sm={3} md={2}>
                                 <FormGroup>
                                     <InputController
+                                        required
                                         inputProps={{ min: 0, step: 0.01 }}
                                         type="number"
                                         label="Price per kg"
