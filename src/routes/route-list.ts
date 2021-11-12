@@ -5,6 +5,7 @@ import VerifySignupEmail from "../pages/verify-signup-email";
 const DashboardPage = lazy(() => import("../pages/dashboard"));
 const SettingsPage = lazy(() => import("../pages/settings"));
 const NewBillPage = lazy(() => import("../pages/new-bill"));
+const TransactionPage = lazy(() => import("../pages/transactions"));
 export interface IRouteList {
     isProtected: boolean;
     path: string;
@@ -45,6 +46,12 @@ const routes: IRouteList[] = [
     {
         path: "/new-bill",
         Component: NewBillPage,
+        exact: true,
+        isProtected: true,
+    },
+    {
+        path: "/transactions",
+        Component: TransactionPage,
         exact: true,
         isProtected: true,
     },
