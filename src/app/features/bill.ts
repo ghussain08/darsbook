@@ -5,7 +5,10 @@ export const billApi = coreQuery
     .injectEndpoints({
         endpoints: (builder) => {
             return {
-                createBill: builder.mutation<{ customerId: number; orderId: number }, INewBillFormValues>({
+                createBill: builder.mutation<
+                    { customerId: number; orderId: number; displayOrderId: string },
+                    INewBillFormValues
+                >({
                     query: (data) => {
                         return {
                             method: "POST",

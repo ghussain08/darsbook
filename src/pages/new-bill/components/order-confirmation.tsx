@@ -10,7 +10,7 @@ const Transition = React.forwardRef<
 >(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
-export default function OrderConfirmation(props: { orderId: number; onClose: () => void; open: boolean }) {
+export default function OrderConfirmation(props: { displayOrderId: string; onClose: () => void; open: boolean }) {
     return (
         <Dialog TransitionComponent={Transition} open={props.open} onClose={props.onClose} title="Bill Preview">
             <DialogContent>
@@ -20,7 +20,7 @@ export default function OrderConfirmation(props: { orderId: number; onClose: () 
                     </Icon>
                 </Box>
                 <Typography textAlign={"center"} variant="h6" color="textPrimary">
-                    Bill has been created. Your bill ID is {props.orderId}
+                    Bill has been created. Your bill ID is <br /> <strong>{props.displayOrderId}</strong>
                 </Typography>
                 <Box my={2} textAlign={"center"}>
                     <Button onClick={props.onClose} color="primary" disableElevation variant="contained">

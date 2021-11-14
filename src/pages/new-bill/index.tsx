@@ -18,10 +18,14 @@ import BillRemark from "./components/bill-remark";
 
 export default function NewBill() {
     const [preview, togglePreview] = useState(false);
-    const [orderDetails, setOrderDetails] = useState<{ orderId: number } | null>(null);
+    const [orderDetails, setOrderDetails] = useState<{ displayOrderId: string } | null>(null);
     const [createBill, { isLoading }] = useCreateBillMutation();
     const { control, handleSubmit, getValues, watch, reset } = useForm<INewBillFormValues>({
-        defaultValues,
+        defaultValues: {
+            ...defaultValues,
+            expenses: [...defaultValues.expenses],
+            seedItems: [...defaultValues.seedItems],
+        },
         resolver: yupResolver(createBillSchema),
     });
 
@@ -37,12 +41,19 @@ export default function NewBill() {
         createBill(data)
             .unwrap()
             .then((response) => {
-                setOrderDetails({ orderId: response.orderId });
-                reset();
+                setOrderDetails({ displayOrderId: response.displayOrderId });
             })
             .catch((err) => {});
     };
 
+    const closeBillCreationConfirmation = () => {
+        reset({
+            ...defaultValues,
+            expenses: [...defaultValues.expenses],
+            seedItems: [...defaultValues.seedItems],
+        });
+        setOrderDetails(null);
+    };
     return (
         <PageContainer pageTitle="New Bill">
             <Box component={Paper} py={3} px={{ lg: 2 }}>
@@ -61,8 +72,8 @@ export default function NewBill() {
                     <Divider />
                     <OrderConfirmation
                         open={orderDetails ? true : false}
-                        orderId={orderDetails ? orderDetails.orderId : 0}
-                        onClose={() => setOrderDetails(null)}
+                        displayOrderId={orderDetails ? orderDetails.displayOrderId : ""}
+                        onClose={closeBillCreationConfirmation}
                     />
                     <Box textAlign={"center"} mt={2}>
                         <Button type="submit" variant="contained" color="primary">
