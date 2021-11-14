@@ -1,6 +1,6 @@
-import InputController, { IControllerProps } from '../input-controller';
-import { useGetUserSeedsQuery } from '../../app/features/seeds';
-import { MenuItem, InputAdornment, CircularProgress } from '@mui/material';
+import InputController, { IControllerProps } from "../input-controller";
+import { useGetUserSeedsQuery } from "../../app/features/seeds";
+import { MenuItem, InputAdornment, CircularProgress } from "@mui/material";
 export default function SeedDropdown(props: IControllerProps) {
     const { data, isFetching } = useGetUserSeedsQuery();
     const seeds = data?.seeds || [];
@@ -13,6 +13,7 @@ export default function SeedDropdown(props: IControllerProps) {
                     </InputAdornment>
                 ) : null,
             }}
+            select
             {...props}
         >
             {seeds.map((seed) =>

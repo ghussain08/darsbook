@@ -1,11 +1,12 @@
-import React, { ReactNode } from 'react';
-import { render } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { Router } from 'react-router';
-import { createMemoryHistory, History } from 'history';
-import { RootState } from '../app/store';
-import { configureStore } from '@reduxjs/toolkit';
-import { reducer } from '../app/store';
+import React, { ReactNode } from "react";
+import { render } from "@testing-library/react";
+import { Provider } from "react-redux";
+import { Router } from "react-router";
+import { createMemoryHistory, History } from "history";
+import { RootState } from "../app/store";
+import { configureStore } from "@reduxjs/toolkit";
+import { reducer } from "../app/store";
+import coreQuery from "./core-rtk-query";
 interface ICustomRenderOptions {
     initialState?: Partial<RootState>;
     initialEntries?: string[];
@@ -26,10 +27,15 @@ const AllTheProviders = (props: IProviderOptions) => {
     );
 };
 
-const customRender = (ui: ReactNode, options: ICustomRenderOptions) => {
-    const { initialEntries = ['/'], initialIndex = 0 } = options;
+const defaultOptions = { initialEntries: ["/"], initialIndex: 0 };
+const customRender = (ui: ReactNode, options: ICustomRenderOptions = defaultOptions) => {
+    const { initialEntries = ["/"], initialIndex = 0 } = options;
     const history = createMemoryHistory({ initialEntries, initialIndex });
-    const store = configureStore({ reducer, preloadedState: options.initialState });
+    const store = configureStore({
+        reducer,
+        preloadedState: options.initialState,
+        middleware: (getDefaultMiddlewares) => getDefaultMiddlewares().concat(coreQuery.middleware),
+    });
     return {
         ...render(
             <AllTheProviders {...options} store={store} history={history}>
@@ -42,7 +48,7 @@ const customRender = (ui: ReactNode, options: ICustomRenderOptions) => {
 };
 
 // re-export everything
-export * from '@testing-library/react';
+export * from "@testing-library/react";
 
 // override render method
 export { customRender as render };

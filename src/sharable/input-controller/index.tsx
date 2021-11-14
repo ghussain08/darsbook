@@ -1,8 +1,8 @@
-import { OutlinedTextFieldProps } from '@mui/material';
-import React from 'react';
-import { Controller } from 'react-hook-form';
-import Input from '../input';
-type inputController = Omit<OutlinedTextFieldProps, 'variant'>;
+import { OutlinedTextFieldProps } from "@mui/material";
+import React from "react";
+import { Controller } from "react-hook-form";
+import Input from "../input";
+type inputController = Omit<OutlinedTextFieldProps, "variant">;
 export interface IControllerProps extends inputController {
     control: any;
     name: string;
@@ -17,14 +17,13 @@ export default function InputController(props: IControllerProps) {
                 const { field, fieldState } = properties;
                 return (
                     <Input
-                        role={props.role || 'textbox'}
-                        inputProps={props.inputProps}
-                        sx={{ backgroundColor: 'white' }}
+                        inputProps={{ role: props.role || "textbox", ...props.inputProps }}
+                        sx={{ backgroundColor: "white" }}
                         variant="outlined"
                         size="small"
                         aria-required={props.required}
                         aria-invalid={!!fieldState.error}
-                        aria-errormessage={fieldState.error ? fieldState.error.message : ''}
+                        aria-errormessage={fieldState.error ? fieldState.error.message : ""}
                         {...field}
                         error={!!fieldState.error}
                         helperText={fieldState.error ? fieldState.error.message : props.helperText}

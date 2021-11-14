@@ -11,10 +11,8 @@ export default function CustomerInfo(props: ICustomerInfoProps) {
     const { control } = props;
     return (
         <Box p={2}>
-            <Typography variant="h6" fontWeight={"500"}>
-                Customer Information
-            </Typography>
-            <Grid sx={{ mt: 2 }} container columnSpacing={2} rowSpacing={2}>
+            <Typography variant="h6">Customer Information</Typography>
+            <Grid sx={{ mt: 1 }} container columnSpacing={2} rowSpacing={1}>
                 <Grid item xs={12} md={6}>
                     <FormGroup>
                         <InputController

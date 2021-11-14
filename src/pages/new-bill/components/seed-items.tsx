@@ -19,10 +19,8 @@ export default function SeedItems(props: ISeedItemsProps) {
 
     return (
         <Box p={2}>
-            <Typography variant="h6" fontWeight={"500"}>
-                Seed Items
-            </Typography>
-            <Grid sx={{ my: 2 }} container spacing={2} rowSpacing={3}>
+            <Typography variant="h6">Seed Items</Typography>
+            <Grid sx={{ mb: 1, mt: 0.5 }} container spacing={2} rowSpacing={2} data-testid="seed-items">
                 {fields.map((seedItem: any, index) => {
                     return (
                         <React.Fragment key={index}>
@@ -30,8 +28,8 @@ export default function SeedItems(props: ISeedItemsProps) {
                                 <FormGroup>
                                     <SeedDropdown
                                         required
-                                        select
                                         label="Item"
+                                        id={`seedItem-${index}`}
                                         control={props.control}
                                         name={`seedItems.${index}.seedId`}
                                     />
@@ -42,7 +40,12 @@ export default function SeedItems(props: ISeedItemsProps) {
                                     <InputController
                                         required
                                         type="number"
-                                        inputProps={{ min: 0, step: 0.01 }}
+                                        id={`seedItems-${index}`}
+                                        inputProps={{
+                                            min: 0,
+                                            step: 0.01,
+                                            "data-testid": `seedItems.${index}.quantity`,
+                                        }}
                                         label="Weight(in kgs)"
                                         control={props.control}
                                         name={`seedItems.${index}.quantity`}
@@ -53,8 +56,13 @@ export default function SeedItems(props: ISeedItemsProps) {
                                 <FormGroup>
                                     <InputController
                                         required
-                                        inputProps={{ min: 0, step: 0.01 }}
+                                        inputProps={{
+                                            min: 0,
+                                            step: 0.01,
+                                            "data-testid": `seedItems.${index}.pricePerKg`,
+                                        }}
                                         type="number"
+                                        id={`pricePerKg-${index}`}
                                         label="Price per kg"
                                         control={props.control}
                                         name={`seedItems.${index}.pricePerKg`}
@@ -63,7 +71,9 @@ export default function SeedItems(props: ISeedItemsProps) {
                             </Grid>
                             <Grid item xs={12} sm={3} md={2} alignSelf={"center"}>
                                 <FormGroup>
-                                    <Typography>Total: {getTotal(values, index)}</Typography>
+                                    <Typography data-testid={`seedTotal.${index}`}>
+                                        Total: {getTotal(values, index)}
+                                    </Typography>
                                 </FormGroup>
                             </Grid>
                             <Grid item xs={12} sm={3} md={1} key={index}>
@@ -74,6 +84,7 @@ export default function SeedItems(props: ISeedItemsProps) {
                                             variant="outlined"
                                             onClick={() => remove(index)}
                                             color="error"
+                                            data-testid={`remove-seed-item`}
                                         >
                                             remove
                                         </Button>
@@ -84,9 +95,9 @@ export default function SeedItems(props: ISeedItemsProps) {
                     );
                 })}
             </Grid>
-            {/* <Typography paragraph color="error">
+            <Typography paragraph color="error">
                 At least 1 seed item is required
-            </Typography> */}
+            </Typography>
             <Box mt={4}>
                 <Button
                     onClick={() => append({ quantity: "", pricePerKg: "", seedId: "" })}
@@ -103,7 +114,6 @@ export default function SeedItems(props: ISeedItemsProps) {
 
 function getTotal(data: INewBillFormValues, index: number) {
     const item = data.seedItems[index];
-    console.log(item);
     if (item.pricePerKg && item.quantity) {
         return (parseFloat(item.pricePerKg) * parseFloat(item.quantity)).toFixed(2);
     }

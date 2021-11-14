@@ -23,7 +23,7 @@ export default function Routes() {
                 })}
                 <CheckAuth>
                     <ResponsiveDrawer>
-                        <Suspense fallback={() => <FullPageLoader isOpen={true} />}>
+                        <Suspense fallback={<FullPageLoader isOpen={true} />}>
                             {privateRoutes.map((route, index) => {
                                 const Component = route.Component;
                                 return (

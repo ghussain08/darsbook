@@ -16,10 +16,8 @@ export default function ExpenseItems(props: IExpenseItemsProps) {
     });
     return (
         <Box p={2}>
-            <Typography variant="h6" fontWeight={"500"}>
-                Additional Expenses
-            </Typography>
-            <Grid sx={{ mt: 2 }} container spacing={2}>
+            <Typography variant="h6">Additional Expenses</Typography>
+            <Grid sx={{ mt: 0 }} container spacing={2} data-testid="expense-items">
                 {fields.map((expenseItem: any, index) => {
                     return (
                         <React.Fragment key={index}>
@@ -30,6 +28,7 @@ export default function ExpenseItems(props: IExpenseItemsProps) {
                                         select
                                         label="Expense Category"
                                         control={props.control}
+                                        id={`expense-category-${index}`}
                                         name={`expenses.${index}.expenseId`}
                                     />
                                 </FormGroup>
@@ -39,8 +38,9 @@ export default function ExpenseItems(props: IExpenseItemsProps) {
                                     <InputController
                                         type="number"
                                         required
-                                        inputProps={{ min: 0 }}
+                                        inputProps={{ min: 0, "data-testid": `expenses.${index}.amount` }}
                                         label="Amount"
+                                        id={`expense-amount-${index}`}
                                         control={props.control}
                                         name={`expenses.${index}.amount`}
                                     />
@@ -54,6 +54,7 @@ export default function ExpenseItems(props: IExpenseItemsProps) {
                                         variant="outlined"
                                         onClick={() => remove(index)}
                                         color="error"
+                                        data-testid="remove-expense-item"
                                     >
                                         remove
                                     </Button>
