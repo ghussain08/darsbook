@@ -17,7 +17,6 @@ export default function CustomerInfo(props: ICustomerInfoProps) {
                     <FormGroup>
                         <InputController
                             required
-                            onBlur={(e) => console.log(e.target.value)}
                             control={control}
                             name="customerMobile"
                             label="Mobile Number"

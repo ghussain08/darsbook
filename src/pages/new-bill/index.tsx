@@ -56,7 +56,7 @@ export default function NewBill() {
     };
     return (
         <PageContainer pageTitle="New Bill">
-            <Box component={Paper} py={3} px={{ lg: 2 }}>
+            <Box component={Paper} py={3} variant="outlined" px={{ lg: 2 }}>
                 <FullPageLoader isOpen={isLoading} message="Please wait, Generating bill..." />
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <OrderType control={control} />
