@@ -14,3 +14,16 @@ export const getURL = (
     }
     return url;
 };
+
+export function getQueryParams() {
+    const url = new URLSearchParams(window.location.search);
+    const urlParams = Object.fromEntries(url.entries());
+    const params: { [key: string]: string | null | undefined } = {};
+    Object.keys(urlParams).forEach((key) => {
+        params[key] = urlParams[key].trim();
+        if (params[key] === "null") {
+            params[key] = null;
+        }
+    });
+    return params;
+}

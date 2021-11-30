@@ -6,20 +6,21 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Sidebar from "../sidebar";
-import { useTheme } from "@mui/material";
+import { colors, useTheme } from "@mui/material";
 const drawerWidth = 250;
 
 function ResponsiveDrawer(props: { children: React.ReactNode }) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
-    const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen);
+    const handleDrawerCloseOnMobile = () => {
+        if (mobileOpen) {
+            setMobileOpen(false);
+        }
     };
 
     const drawer = <Sidebar />;
 
     const container = undefined;
-    const theme = useTheme();
     return (
         <Box sx={{ display: "flex" }}>
             <AppBar
@@ -38,7 +39,7 @@ function ResponsiveDrawer(props: { children: React.ReactNode }) {
                         color="primary"
                         aria-label="open drawer"
                         edge="start"
-                        onClick={handleDrawerToggle}
+                        onClick={() => setMobileOpen(true)}
                         sx={{ mr: 2, display: { sm: "none" } }}
                     >
                         <MenuIcon />
@@ -49,17 +50,17 @@ function ResponsiveDrawer(props: { children: React.ReactNode }) {
                 component="nav"
                 sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 }, zIndex: 1 }}
                 aria-label="mailbox folders"
-                onClick={handleDrawerToggle}
+                onClick={handleDrawerCloseOnMobile}
             >
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                 <Drawer
                     container={container}
                     variant="temporary"
                     open={mobileOpen}
-                    onClose={handleDrawerToggle}
-                    ModalProps={{
-                        keepMounted: true, // Better open performance on mobile.
-                    }}
+                    onClose={() => setMobileOpen(false)}
+                    // ModalProps={{
+                    //     keepMounted: true, // Better open performance on mobile.
+                    // }}
                     sx={{
                         display: { xs: "block", sm: "none" },
                         "& .MuiDrawer-paper": {
@@ -84,12 +85,7 @@ function ResponsiveDrawer(props: { children: React.ReactNode }) {
                     {drawer}
                 </Drawer>
             </Box>
-            <Box
-                bgcolor={theme.palette.grey[50]}
-                component="main"
-                sx={{ flexGrow: 1, p: 2, minHeight: "100vh" }}
-                mt="57px"
-            >
+            <Box bgcolor={colors.grey[100]} component="main" sx={{ flexGrow: 1, p: 2, minHeight: "100vh" }} mt="57px">
                 {props.children}
             </Box>
         </Box>

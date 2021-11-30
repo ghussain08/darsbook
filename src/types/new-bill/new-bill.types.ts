@@ -46,4 +46,9 @@ export interface IBillTransaction {
 
 export interface IBillFilters {
     nextCursor: null | number;
+    orderId?: number;
+    isActive?: string | null;
+    orderType?: string;
+    customerMobile?: string | null;
+    seedId?: string;
 }

@@ -1,9 +1,17 @@
 import { IBillFilters, IBillTransaction, INewBillFormValues } from "../../types/new-bill/new-bill.types";
 import { IListResponse } from "../../types/response/list-response.type";
-import { getURL } from "../../utils/common";
+import { getQueryParams, getURL } from "../../utils/common";
 import coreQuery from "../../utils/core-rtk-query";
 
 export const billApi = coreQuery
+    .enhanceEndpoints({
+        addTagTypes: ["Bills"],
+        endpoints: {
+            createBill: {
+                invalidatesTags: ["Bills"],
+            },
+        },
+    })
     .injectEndpoints({
         endpoints: (builder) => {
             return {
@@ -33,16 +41,41 @@ export const billApi = coreQuery
                             meta,
                         };
                     },
+                    providesTags: (result) => {
+                        return result
+                            ? [
+                                  ...result.data.map((bill) => ({ type: "Bills" as const, id: bill.orderId })),
+                                  { type: "Bills", id: "List" },
+                              ]
+                            : [{ type: "Bills", id: "List" }];
+                    },
+                }),
+                deleteBill: builder.mutation<{ orderId: number }, IBillFilters & { orderId: number }>({
+                    query: (data) => {
+                        return {
+                            method: "DELETE",
+                            url: `/api/private/v1/bill`,
+                            data,
+                        };
+                    },
+                    async onQueryStarted(reqData, options) {
+                        const cacheKey = getQueryParams();
+                        const { dispatch, queryFulfilled } = options;
+                        try {
+                            await queryFulfilled;
+                            const patch = billApi.util.updateQueryData("getBills", cacheKey, (draft) => {
+                                // find the order
+                                const order = draft.data.find((order) => order.orderId === reqData.orderId);
+                                // update order
+                                Object.assign(order, { isActive: 0 });
+                            });
+                            dispatch(patch);
+                        } catch (err) {
+                            console.log(err);
+                        }
+                    },
                 }),
             };
         },
-    })
-    .enhanceEndpoints({
-        addTagTypes: ["Bills"],
-        endpoints: {
-            createBill: {
-                invalidatesTags: ["Bills"],
-            },
-        },
     });
-export const { useCreateBillMutation, reducer, reducerPath, useGetBillsQuery } = billApi;
+export const { useCreateBillMutation, reducer, reducerPath, useGetBillsQuery, useDeleteBillMutation } = billApi;

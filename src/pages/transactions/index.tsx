@@ -1,5 +1,5 @@
 // react functional component
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import PageContainer from "../../sharable/page-container";
 import { billApi } from "../../app/features/bill";
 import Loader from "../../sharable/loader";
@@ -10,10 +10,12 @@ import BillCard from "./component/bill-card";
 import Empty from "../../sharable/empty";
 import { Link as RouterLink, useHistory } from "react-router-dom";
 import Error from "../../sharable/error";
+import { getQueryParams } from "../../utils/common";
+import BillFilters from "./component/bill-filters";
 
 export default function Bills() {
     const [trigger, result] = billApi.useLazyGetBillsQuery();
-    const [filters, setFilters] = useState<Partial<IBillFilters>>({ nextCursor: null });
+    // const [filters, setFilters] = useState<Partial<IBillFilters>>({ nextCursor: null });
 
     const { isError, isFetching, isLoading, data } = result;
 
@@ -23,17 +25,27 @@ export default function Bills() {
 
     // use url query param for next and prev pagination
     const history = useHistory();
-    const url = new URLSearchParams(history.location.search);
 
-    // if nextCursor is not available in url, then it's the first page, so set it to null
-    const nextCursor = url.get("nextCursor") ? parseInt(url.get("nextCursor")!) : null;
+    const getTransactions = useCallback(() => {
+        trigger({ ...getQueryParams() }, true);
+    }, [trigger]);
 
+    // handle url change, if url changes then refetch the data
     useEffect(() => {
-        trigger({ ...filters, nextCursor }, true);
-    }, [filters, trigger, nextCursor]);
+        const unlistened = history.listen((data) => {
+            getTransactions();
+        });
+        return () => unlistened();
+    }, [getTransactions, history]);
+
+    // handle initial mount
+    useEffect(() => {
+        getTransactions();
+    }, [getTransactions]);
 
     return (
         <PageContainer pageTitle="Transactions">
+            <BillFilters />
             <Box>
                 {bills?.map((bill) => (
                     <BillCard bill={bill} key={bill.orderId} />
@@ -42,7 +54,7 @@ export default function Bills() {
 
             <Loader isOpen={isFetching || isLoading} message="Fetching transactions...please wait" />
 
-            <Error isOpen={isError} onRetry={() => trigger(filters)} />
+            <Error isOpen={isError} onRetry={() => getTransactions()} />
 
             {!isError && !isFetching && !isLoading && bills?.length === 0 && (
                 <Box textAlign={"center"} display={"flex"} flexDirection={"column"} alignItems={"center"}>

@@ -13,7 +13,7 @@ const menuItems = [
     },
     {
         name: "Transactions",
-        to: "/transactions",
+        to: "/transactions?nextCursor=null&isActive=1",
         icon: Receipt,
     },
     {

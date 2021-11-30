@@ -1,8 +1,6 @@
-import React from "react";
 import {
     Box,
     Typography,
-    Divider,
     Table,
     TableHead,
     TableBody,
@@ -10,25 +8,35 @@ import {
     TableCell,
     TableContainer,
     Paper,
-    Grid,
 } from "@mui/material";
 import { IBillTransaction } from "../../../types/new-bill/new-bill.types";
+import { colors } from "@mui/material";
+import BillAction from "./bill-actions";
 
 export default function BillCardDetails(props: { bill: IBillTransaction }) {
     const { expenses, items } = props.bill;
     return (
-        <Box>
+        <Box p={2} border="1px solid #ccc" bgcolor={colors.grey[50]} borderRadius={"5px"}>
+            <BillAction bill={props.bill} />
             <Typography variant="h6" gutterBottom>
                 Bill Items
             </Typography>
             <TableContainer sx={{ mb: 1 }} component={Paper} variant="outlined">
-                <Table size="small">
+                <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Item</TableCell>
-                            <TableCell>Quantity</TableCell>
-                            <TableCell>Price</TableCell>
-                            <TableCell>Total</TableCell>
+                            <TableCell>
+                                <strong>Item</strong>
+                            </TableCell>
+                            <TableCell>
+                                <strong>Quantity</strong>
+                            </TableCell>
+                            <TableCell>
+                                <strong>Price/kg</strong>
+                            </TableCell>
+                            <TableCell>
+                                <strong>Total</strong>
+                            </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -37,11 +45,20 @@ export default function BillCardDetails(props: { bill: IBillTransaction }) {
                                 <TableCell>{item.item}</TableCell>
                                 <TableCell>{item.quantity} Kgs</TableCell>
                                 <TableCell>{item.pricePerKg} INR</TableCell>
-                                <TableCell>
-                                    <strong>{item.total} INR</strong>
-                                </TableCell>
+                                <TableCell>{item.total} INR</TableCell>
                             </TableRow>
                         ))}
+                        <TableRow>
+                            <TableCell colSpan={2}></TableCell>
+                            <TableCell>
+                                <Typography variant="body2">
+                                    <strong>Total</strong>
+                                </Typography>
+                            </TableCell>
+                            <TableCell>
+                                <strong>{props.bill.totalAmount} INR</strong>
+                            </TableCell>
+                        </TableRow>
                     </TableBody>
                 </Table>
             </TableContainer>
@@ -51,22 +68,35 @@ export default function BillCardDetails(props: { bill: IBillTransaction }) {
                         Additional deductions
                     </Typography>
                     <TableContainer component={Paper} variant="outlined">
-                        <Table size="small">
+                        <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>Expense</TableCell>
-                                    <TableCell>Amount</TableCell>
+                                    <TableCell>
+                                        {" "}
+                                        <strong>Expense</strong>
+                                    </TableCell>
+                                    <TableCell>
+                                        <strong>Amount</strong>
+                                    </TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {expenses.map((expense, index) => (
                                     <TableRow key={index}>
                                         <TableCell>{expense.expense}</TableCell>
-                                        <TableCell>
-                                            <strong>{expense.amount} INR</strong>
-                                        </TableCell>
+                                        <TableCell>{expense.amount} INR</TableCell>
                                     </TableRow>
                                 ))}
+                                <TableRow>
+                                    <TableCell>
+                                        <Typography variant="body2">
+                                            <strong>Total</strong>
+                                        </Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                        <strong>{props.bill.totalAmount} INR</strong>
+                                    </TableCell>
+                                </TableRow>
                             </TableBody>
                         </Table>
                     </TableContainer>
