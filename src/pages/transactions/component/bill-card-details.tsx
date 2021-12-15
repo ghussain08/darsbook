@@ -43,9 +43,9 @@ export default function BillCardDetails(props: { bill: IBillTransaction }) {
                         {items.map((item, index) => (
                             <TableRow key={index}>
                                 <TableCell>{item.item}</TableCell>
-                                <TableCell>{item.quantity} Kgs</TableCell>
-                                <TableCell>{item.pricePerKg} INR</TableCell>
-                                <TableCell>{item.total} INR</TableCell>
+                                <TableCell>{item.quantity.toFixed(2)} Kgs</TableCell>
+                                <TableCell>{item.pricePerKg.toFixed(2)} INR</TableCell>
+                                <TableCell>{item.total.toFixed(2)} INR</TableCell>
                             </TableRow>
                         ))}
                         <TableRow>
@@ -56,7 +56,7 @@ export default function BillCardDetails(props: { bill: IBillTransaction }) {
                                 </Typography>
                             </TableCell>
                             <TableCell>
-                                <strong>{props.bill.totalAmount} INR</strong>
+                                <strong>{props.bill.totalAmount.toFixed(2)} INR</strong>
                             </TableCell>
                         </TableRow>
                     </TableBody>
@@ -84,7 +84,7 @@ export default function BillCardDetails(props: { bill: IBillTransaction }) {
                                 {expenses.map((expense, index) => (
                                     <TableRow key={index}>
                                         <TableCell>{expense.expense}</TableCell>
-                                        <TableCell>{expense.amount} INR</TableCell>
+                                        <TableCell>{expense.amount.toFixed(2)} INR</TableCell>
                                     </TableRow>
                                 ))}
                                 <TableRow>
@@ -94,7 +94,7 @@ export default function BillCardDetails(props: { bill: IBillTransaction }) {
                                         </Typography>
                                     </TableCell>
                                     <TableCell>
-                                        <strong>{props.bill.totalAmount} INR</strong>
+                                        <strong>{props.bill.totalAmount.toFixed(2)} INR</strong>
                                     </TableCell>
                                 </TableRow>
                             </TableBody>

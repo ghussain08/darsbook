@@ -1,4 +1,10 @@
-import React from "react";
+import { Grid } from "@mui/material";
+import PageContainer from "../../sharable/page-container";
+import Stocks from "./components/stock";
 export default function Dashboard() {
-    return <div>this is dashboard</div>;
+    return (
+        <PageContainer pageTitle="Dashboard">
+            <Stocks />
+        </PageContainer>
+    );
 }

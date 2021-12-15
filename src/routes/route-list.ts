@@ -2,6 +2,7 @@ import { lazy } from "react";
 import Login from "../pages/login";
 import Signup from "../pages/signup";
 import VerifySignupEmail from "../pages/verify-signup-email";
+import Logout from "../pages/logout";
 const DashboardPage = lazy(() => import("../pages/dashboard"));
 const SettingsPage = lazy(() => import("../pages/settings"));
 const NewBillPage = lazy(() => import("../pages/new-bill"));
@@ -52,6 +53,12 @@ const routes: IRouteList[] = [
     {
         path: "/transactions",
         Component: TransactionPage,
+        exact: true,
+        isProtected: true,
+    },
+    {
+        path: "/logout",
+        Component: Logout,
         exact: true,
         isProtected: true,
     },

@@ -1,4 +1,4 @@
-import { Dashboard, Receipt, AddCircle, Settings } from "@mui/icons-material";
+import { Dashboard, Receipt, AddCircle, Settings, Logout } from "@mui/icons-material";
 const menuItems = [
     {
         name: "Dashboard",
@@ -20,6 +20,11 @@ const menuItems = [
         name: "Settings",
         to: "/settings",
         icon: Settings,
+    },
+    {
+        name: "Logout",
+        to: "/logout",
+        icon: Logout,
     },
 ];
 export default menuItems;

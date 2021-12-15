@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router';
-import useAppDispatch from '../../hooks/useAppDispatch';
-import useAppSelector from '../../hooks/useAppSelector';
-import { Backdrop } from '@mui/material';
-import { IUserState, setUser } from '../../app/features/user';
-import fetchLoggedInUserDetails from './api';
-import Loader from '../../sharable/loader';
+import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router";
+import useAppDispatch from "../../hooks/useAppDispatch";
+import useAppSelector from "../../hooks/useAppSelector";
+import { Backdrop } from "@mui/material";
+import { IUserState, setUser } from "../../app/features/user";
+import fetchLoggedInUserDetails from "./api";
+import Loader from "../../sharable/loader";
 export default function CheckAuth(props: { children: JSX.Element }) {
     const user = useAppSelector((state) => state.user);
     const [isLoading, setLoader] = useState(true);
@@ -20,9 +20,10 @@ export default function CheckAuth(props: { children: JSX.Element }) {
                 setLoader(false);
             });
     }, [dispatch]);
+
     if (isLoading) {
         return (
-            <Backdrop sx={{ backgroundColor: 'white' }} open={true}>
+            <Backdrop sx={{ backgroundColor: "white" }} open={true}>
                 <Loader isOpen={true} />
             </Backdrop>
         );

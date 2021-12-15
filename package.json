@@ -3,6 +3,7 @@
     "version": "5.0.0",
     "private": true,
     "dependencies": {
+        "@date-io/dayjs": "^2.11.0",
         "@hookform/resolvers": "^2.8.2",
         "@mui/icons-material": "^5.0.3",
         "@mui/lab": "latest",
@@ -15,6 +16,7 @@
         "axios": "^0.23.0",
         "axios-auth-refresh": "^3.2.1",
         "cogo-toast": "^4.2.3",
+        "dayjs": "^1.10.7",
         "react": "latest",
         "react-dom": "latest",
         "react-hook-form": "^7.17.2",
