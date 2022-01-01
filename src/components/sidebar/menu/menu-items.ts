@@ -21,10 +21,5 @@ const menuItems = [
         to: "/settings",
         icon: Settings,
     },
-    {
-        name: "Logout",
-        to: "/logout",
-        icon: Logout,
-    },
 ];
 export default menuItems;

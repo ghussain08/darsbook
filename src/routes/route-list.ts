@@ -3,6 +3,7 @@ import Login from "../pages/login";
 import Signup from "../pages/signup";
 import VerifySignupEmail from "../pages/verify-signup-email";
 import Logout from "../pages/logout";
+import test from "../pages/reset-password";
 const DashboardPage = lazy(() => import("../pages/dashboard"));
 const SettingsPage = lazy(() => import("../pages/settings"));
 const NewBillPage = lazy(() => import("../pages/new-bill"));
@@ -61,6 +62,12 @@ const routes: IRouteList[] = [
         Component: Logout,
         exact: true,
         isProtected: true,
+    },
+    {
+        path: "/password-reset",
+        Component: test,
+        exact: true,
+        isProtected: false,
     },
 ];
 
