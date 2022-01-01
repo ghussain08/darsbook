@@ -1,4 +1,4 @@
-import { Box, Typography, Grid, colors, Tooltip, TextField } from "@mui/material";
+import { Box, Typography, Grid } from "@mui/material";
 import { useEffect } from "react";
 import { stockApi, stockFilters } from "../../../app/features/stocks";
 import Loader from "../../../sharable/loader";
@@ -6,14 +6,14 @@ import StockCard from "./stock-card";
 import StockRange from "./stock-range";
 export default function Stocks() {
     const [trigger, result] = stockApi.useLazyGetStocksQuery();
-    const { isError, isFetching, isLoading, data } = result;
+    const { isFetching, isLoading, data } = result;
 
     const stockCards = data?.map((stock, index) => {
         return <StockCard stock={stock} key={index} />;
     });
     useEffect(() => {
         trigger({ dateFrom: null, dateTo: null }, true);
-    }, []);
+    }, [trigger]);
 
     const applyDateFilters = (dateFilters: stockFilters) => {
         trigger(dateFilters, true);

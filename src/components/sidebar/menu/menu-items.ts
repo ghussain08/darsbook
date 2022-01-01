@@ -1,4 +1,4 @@
-import { Dashboard, Receipt, AddCircle, Settings, Logout } from "@mui/icons-material";
+import { Dashboard, Receipt, AddCircle, Settings } from "@mui/icons-material";
 const menuItems = [
     {
         name: "Dashboard",

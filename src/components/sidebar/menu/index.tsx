@@ -1,7 +1,6 @@
-import React from "react";
 import { List, ListItem, ListItemIcon, ListItemText, Box, Icon } from "@mui/material";
-import { Dashboard, Logout, Receipt } from "@mui/icons-material";
-import { NavLink, useLocation } from "react-router-dom";
+import { Logout } from "@mui/icons-material";
+import { NavLink } from "react-router-dom";
 import menuItems from "./menu-items";
 import { useTheme } from "@mui/material";
 

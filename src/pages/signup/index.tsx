@@ -1,23 +1,22 @@
-import React, { ReactNode, useState } from 'react';
-import { Container, Box, Typography, Button, Link, CircularProgress } from '@mui/material';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import InputController from '../../sharable/input-controller';
-import FormGroup from '../../sharable/form-group';
-import { Link as ReactRouter } from 'react-router-dom';
-import signupSchema from './signup.schema';
-import settings from '../../config';
-import { ISignupPayload } from '../../types/signup/signup.types';
-import { handleSignup } from './api';
-import useAppDispatch from '../../hooks/useAppDispatch';
-import { Redirect, useHistory } from 'react-router';
-import { setSignUpData } from '../../app/features/sign-up';
-import { setEmail } from '../../app/features/email-verification';
+import { Container, Box, Typography, Button, Link, CircularProgress } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import InputController from "../../sharable/input-controller";
+import FormGroup from "../../sharable/form-group";
+import { Link as ReactRouter } from "react-router-dom";
+import signupSchema from "./signup.schema";
+import settings from "../../config";
+import { ISignupPayload } from "../../types/signup/signup.types";
+import { handleSignup } from "./api";
+import useAppDispatch from "../../hooks/useAppDispatch";
+import { Redirect, useHistory } from "react-router";
+
+import { setEmail } from "../../app/features/email-verification";
 const formDefaultValues = {
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: '',
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
 };
 
 /**
@@ -31,7 +30,7 @@ export default function CreateAccount() {
         resolver: yupResolver(signupSchema), // validate
         defaultValues: { ...formDefaultValues },
     });
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
 
     const { isSubmitting } = formState;
     const dispatch = useAppDispatch();
@@ -41,7 +40,7 @@ export default function CreateAccount() {
             await handleSignup(data);
             dispatch(setEmail({ email: data.email }));
             // redirect to verify email page
-            history.push('/verify-email');
+            history.push("/verify-email");
         } catch (err) {}
     };
     if (token) {
@@ -60,7 +59,7 @@ export default function CreateAccount() {
                 <form data-testid="signup-form" onSubmit={handleSubmit(onSignup)} action="">
                     <FormGroup>
                         <InputController
-                            inputProps={{ 'data-testid': 'email-field' }}
+                            inputProps={{ "data-testid": "email-field" }}
                             autoComplete="email"
                             control={control}
                             label="Email"
@@ -70,7 +69,7 @@ export default function CreateAccount() {
                     </FormGroup>
                     <FormGroup>
                         <InputController
-                            inputProps={{ 'data-testid': 'password-field' }}
+                            inputProps={{ "data-testid": "password-field" }}
                             autoComplete="password"
                             control={control}
                             label="Password"
@@ -81,7 +80,7 @@ export default function CreateAccount() {
                     </FormGroup>
                     <FormGroup>
                         <InputController
-                            inputProps={{ 'data-testid': 'firstname-field' }}
+                            inputProps={{ "data-testid": "firstname-field" }}
                             autoComplete="firstname"
                             control={control}
                             label="First Name"
@@ -91,7 +90,7 @@ export default function CreateAccount() {
                     </FormGroup>
                     <FormGroup>
                         <InputController
-                            inputProps={{ 'data-testid': 'lastname-field' }}
+                            inputProps={{ "data-testid": "lastname-field" }}
                             autoComplete="last-name"
                             control={control}
                             label="Last Name"
@@ -102,7 +101,7 @@ export default function CreateAccount() {
                         * marked fields are required
                     </Typography>
                     <Typography data-testid="terms-and-condition-text" my={3} variant="body2">
-                        By creating account, you agree to our{' '}
+                        By creating account, you agree to our{" "}
                         <Link component={ReactRouter} to="/login">
                             terms and conditions.
                         </Link>
@@ -118,11 +117,11 @@ export default function CreateAccount() {
                         variant="contained"
                         disableElevation
                     >
-                        {isSubmitting ? 'Creating...' : 'Create free account'}
+                        {isSubmitting ? "Creating..." : "Create free account"}
                     </Button>
                 </form>
                 <Typography data-testid="login-text" textAlign="center" my={5}>
-                    Already created?{' '}
+                    Already created?{" "}
                     <Link component={ReactRouter} to="/login">
                         Login Here
                     </Link>

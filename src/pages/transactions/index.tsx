@@ -1,9 +1,8 @@
 // react functional component
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import PageContainer from "../../sharable/page-container";
 import { billApi } from "../../app/features/bill";
 import Loader from "../../sharable/loader";
-import { IBillFilters } from "../../types/new-bill/new-bill.types";
 import { Box, Button } from "@mui/material";
 import { ArrowRight, AddCircleRounded } from "@mui/icons-material";
 import BillCard from "./component/bill-card";

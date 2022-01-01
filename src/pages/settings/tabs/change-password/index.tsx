@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import InputController from "../../../../sharable/input-controller";
 import request from "../../../../utils/request";
-import cogoToast from "cogo-toast";
+
 interface IPasswordState {
     password1: string;
     password2: string;
@@ -27,7 +27,6 @@ export default function ChangePassword() {
         if (isSubmitting) {
             return;
         }
-        console.log(data);
         if (data.password1 !== data.password2) {
             return;
         }

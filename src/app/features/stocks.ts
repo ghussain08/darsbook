@@ -1,4 +1,3 @@
-import { number } from "yup/lib/locale";
 import { getURL } from "../../utils/common";
 import coreQuery from "../../utils/core-rtk-query";
 export interface IStockDetails {

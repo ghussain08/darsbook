@@ -6,7 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Sidebar from "../sidebar";
-import { colors, useTheme } from "@mui/material";
+import { colors } from "@mui/material";
 const drawerWidth = 250;
 
 function ResponsiveDrawer(props: { children: React.ReactNode }) {

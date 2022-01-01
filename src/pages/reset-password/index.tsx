@@ -1,9 +1,7 @@
-import { Container, Box, Typography, Button, CircularProgress } from "@mui/material";
-import cogoToast from "cogo-toast";
+import { Container, Box, Typography } from "@mui/material";
+
 import React, { useState } from "react";
-import FormGroup from "../../sharable/form-group";
-import Input from "../../sharable/input";
-import request from "../../utils/request";
+
 import PasswordResetEmail from "./email";
 import PasswordForm from "./password-form";
 export default function VerifySignupEmail() {

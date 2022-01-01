@@ -1,4 +1,4 @@
-import { Box, Typography, Grid, colors, Tooltip } from "@mui/material";
+import { Box, Typography, Grid, colors } from "@mui/material";
 import { IStockDetails } from "../../../app/features/stocks";
 
 export default function StockCard(props: { stock: IStockDetails }) {

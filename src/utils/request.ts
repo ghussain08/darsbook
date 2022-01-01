@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosError } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import config from "../config";
 import cogotoast from "cogo-toast";
 import { BaseQueryFn } from "@reduxjs/toolkit/dist/query";

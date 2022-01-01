@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Grid, Typography, Accordion, AccordionSummary, AccordionDetails, Chip, Divider } from "@mui/material";
+import { Box, Grid, Typography, Accordion, AccordionSummary, AccordionDetails, Chip } from "@mui/material";
 import { IBillTransaction } from "../../../types/new-bill/new-bill.types";
 import BillCardDetails from "./bill-card-details";
 

@@ -1,9 +1,9 @@
-import React from 'react';
-import { Card, List, CardContent, CardHeader, Alert } from '@mui/material';
-import Loader from '../../../../sharable/loader';
-import Empty from '../../../../sharable/empty';
-import ExpenseCategory from './expense-category';
-import { useGetUserExpenseItemQuery } from '../../../../app/features/expenses-items';
+import React from "react";
+import { Card, List, CardContent, CardHeader } from "@mui/material";
+import Loader from "../../../../sharable/loader";
+import Empty from "../../../../sharable/empty";
+import ExpenseCategory from "./expense-category";
+import { useGetUserExpenseItemQuery } from "../../../../app/features/expenses-items";
 
 export default function ExpenseCategories() {
     const { data, isLoading } = useGetUserExpenseItemQuery();
