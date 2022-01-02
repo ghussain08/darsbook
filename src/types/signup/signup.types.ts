@@ -3,4 +3,5 @@ export interface ISignupPayload {
     password: string;
     firstName: string;
     lastName?: string;
+    code?: string;
 }

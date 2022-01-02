@@ -1,4 +1,4 @@
-import { Container, Box, Typography, Button, Link, CircularProgress } from "@mui/material";
+import { Container, Box, Typography, Button, Link, CircularProgress, FormHelperText } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import InputController from "../../sharable/input-controller";
@@ -17,6 +17,7 @@ const formDefaultValues = {
     password: "",
     firstName: "",
     lastName: "",
+    code: "",
 };
 
 /**
@@ -95,6 +96,18 @@ export default function CreateAccount() {
                             control={control}
                             label="Last Name"
                             name="lastName"
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <FormHelperText>
+                            We are currently Invite Only. Please enter your invite code to signup.
+                        </FormHelperText>
+                        <InputController
+                            required
+                            inputProps={{ "data-testid": "lastname-field" }}
+                            control={control}
+                            label="Invite Code"
+                            name="code"
                         />
                     </FormGroup>
                     <Typography data-testid="form-required-message" my={3} variant="body2" color="error">

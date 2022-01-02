@@ -1,3 +1,3 @@
 export const devConfig = {
-    baseUrl: "https://api.asaanjo.com",
+    baseUrl: "http://localhost:3001",
 };
